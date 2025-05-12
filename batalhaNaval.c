@@ -1,14 +1,58 @@
 #include <stdio.h>
 
 // Desafio Batalha Naval - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de Batalha Naval.
-// Siga os comentários para implementar cada parte do desafio.
 
 int main() {
-    // Nível Novato - Posicionamento dos Navios
-    // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
-    // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
-    // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
+    // INICIALIZANDO VARIÁVEIS
+    int x, y;
+    int tabuleiro[10][10];
+    
+    // PREENCHENDO TABULEIRO
+    // Águas
+    for (y=0; y<10; y++) {
+        for (x=0; x<10; x++){
+            tabuleiro[y][x] = 0;
+        }
+    }
+    // Navil horizontal
+    for (x=2; x<5; x++) {
+        tabuleiro[8][x] = 3;
+    }
+    // Navil vertical 
+    for (y=2; y<5; y++) {
+        tabuleiro[y][4] = 3;
+    }
+
+    // ECREVENDO TABULEIRO
+    for(y=-2; y<10; y++) {
+        for(x=-1; x<10; x++) {
+            // Partes em branco (canto superior esquerdo)
+            if (x == -1 && y < 0){
+                printf("  | ");
+            // Primeira linha (letras)
+            } else if (y == -2){
+                printf("%c ", 65+x);
+            // Segunda linha (divisória)
+            } else if (y == -1){
+                printf("--");
+            // Primeira e segunda coluna (números e divisória)
+            } else if (x == -1) {
+                printf("%d | ", y);
+            // Restante do tabuleiro
+            } else {
+                printf("%d ", tabuleiro[y][x]);
+                /*
+                if (tabuleiro[y][x] == 0) {
+                    printf("  ");
+                } else {
+                    printf("* ");
+                }
+                */
+            }
+        }
+        printf("\n");
+    }
+    printf("\n");
 
     // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
     // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
