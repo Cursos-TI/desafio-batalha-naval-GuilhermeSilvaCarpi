@@ -13,19 +13,39 @@ int main() {
         for (x=0; x<10; x++){
             tabuleiro[y][x] = 0;
         }
-    } // Navil horizontal
+    } // Navio horizontal
     for (x=2; x<5; x++) {
         tabuleiro[8][x] = 3;
-    } // Navil vertical 
+    } // Navio vertical 
     for (y=3; y<6; y++) {
         tabuleiro[y][2] = 3;
-    } // Navil diagonal principal
+    } // Navio diagonal principal
     for (x=7, y=5; x<10; x++, y++) {
         tabuleiro[y][x] = 3;
-    } // Navil diagonal secundária
+    } // Navio diagonal secundária
     for (y=1,x=6; y<4; x--,y++) {
         tabuleiro[y][x] = 3;
     }
+
+    // DEFININDO AS HABILIDADES
+    // Habilidade em cone:
+    int habilidade1[3][5] = {
+        {0, 0, 1, 0, 0},
+        {0, 1, 1, 1, 0},
+        {1, 1, 1, 1, 1}
+    };
+    // Habilidade em octaedro:
+    int habilidade2[3][5] = {
+        {0, 0, 1, 0, 0},
+        {0, 1, 1, 1, 0},
+        {0, 0, 1, 0, 0}
+    };
+    // Habilidade de cruz
+    int habilidade3[3][5] = {
+        {0, 0, 1, 0, 0},
+        {1, 1, 1, 1, 1},
+        {0, 0, 1, 0, 0}
+    };
 
     // ECREVENDO TABULEIRO
     for(y=-2; y<10; y++) {
@@ -48,8 +68,10 @@ int main() {
                 //
                 if (tabuleiro[y][x] == 0) {
                     printf("- ");
-                } else {
+                } else if (tabuleiro[y][x] == 3){
                     printf("O ");
+                } else {
+                    printf("X ");
                 }
                 //
             }
@@ -63,21 +85,6 @@ int main() {
     // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
     // Sugestão: Exiba o tabuleiro com as áreas afetadas, utilizando 0 para áreas não afetadas e 1 para áreas atingidas.
 
-    // Exemplos de exibição das habilidades:
-    // Exemplo para habilidade em cone:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 1 1 1 1 1
-    
-    // Exemplo para habilidade em octaedro:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 0 0 1 0 0
-
-    // Exemplo para habilidade em cruz:
-    // 0 0 1 0 0
-    // 1 1 1 1 1
-    // 0 0 1 0 0
-
+    // FINALIZANDO O PROGRAMA
     return 0;
 }
