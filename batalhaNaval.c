@@ -4,9 +4,10 @@
 
 int main() {
     // INICIALIZANDO VARIÁVEIS
-    int x, y;
+    int x, y, w, z, h_origem_x, h_origem_y;
     int tabuleiro[10][10];
     
+
     // PREENCHENDO TABULEIRO
     // Águas
     for (y=0; y<10; y++) {
@@ -27,25 +28,90 @@ int main() {
         tabuleiro[y][x] = 3;
     }
 
+
     // DEFININDO AS HABILIDADES
     // Habilidade em cone:
-    int habilidade1[3][5] = {
+    int habilidade_cone[3][5] = {
         {0, 0, 1, 0, 0},
         {0, 1, 1, 1, 0},
         {1, 1, 1, 1, 1}
     };
     // Habilidade em octaedro:
-    int habilidade2[3][5] = {
+    int habilidade_octaedro[3][5] = {
         {0, 0, 1, 0, 0},
         {0, 1, 1, 1, 0},
         {0, 0, 1, 0, 0}
     };
     // Habilidade de cruz
-    int habilidade3[3][5] = {
+    int habilidade_cruz[3][5] = {
         {0, 0, 1, 0, 0},
         {1, 1, 1, 1, 1},
         {0, 0, 1, 0, 0}
     };
+
+
+    // INTEGRAR HABILIDADES AO TABULEIRO
+    /*
+    y e x são localizações no tabuleiro
+    w e z são localizações na matriz da habilidade
+    */
+    // Definindo origem para o cone
+    h_origem_x = 6;
+    h_origem_y = 5;
+    // Habilidade cone
+    for (w=0, y = h_origem_y; // "w" = 0. "y" é iniciado relativo a origem
+        y < h_origem_y + 3; // a condição do loop é relativa apenas a "y"
+        y++, w++) // "w" e "y" levam + 1
+    {
+        for (z=0, x = h_origem_x-2; // "z" = 0. "x" é iniciado relativo a origem
+            x < h_origem_x+3; // a condição do loop é relativa apenas a "x"
+            x++, z++) // "z" e "x" levam + 1
+        {
+            //se a localização da habilidade for = a 1, transcreve no tabuleiro
+            if (habilidade_cone[w][z] == 1){
+                tabuleiro[y][x] = 1;
+            }
+        }
+    }
+
+    // Definindo origem para o octaedro
+    h_origem_x = 1;
+    h_origem_y = 7;
+    // habilidade octaedro
+    for (w=0, y = h_origem_y-1; // "w" = 0. "y" é iniciado relativo a origem
+        y < h_origem_y + 2; // a condição do loop é relativa apenas a "y"
+        w++, y++) // "w" e "y" levam + 1 
+    {
+        for (z=0, x = h_origem_x-2; // "z" = 0. "x" é iniciado relativo a origem
+            x < h_origem_x+3; // a condição do loop é relativa apenas a "x"
+            x++, z++) // "z" e "x" levam + 1
+        {
+            //se a localização da habilidade for = a 1, transcreve no tabuleiro
+            if (habilidade_octaedro[w][z] == 1) {
+                tabuleiro[y][x] = 1;
+            }
+        }
+    }
+
+    // Definindo origem para a cruz
+    h_origem_x = 3;
+    h_origem_y = 2;
+    // habilidade cruz
+    for (w=0, y = h_origem_y-1; // "w" = 0. "y" é iniciado relativo a origem
+        y < h_origem_y + 2; // a condição do loop é relativa apenas a "y"
+        w++, y++) // "w" e "y" levam + 1 
+    {
+        for (z=0, x = h_origem_x-2; // "z" = 0. "x" é iniciado relativo a origem
+            x < h_origem_x+3; // a condição do loop é relativa apenas a "x"
+            x++, z++) // "z" e "x" levam + 1
+        {
+            //se a localização da habilidade for = a 1, transcreve no tabuleiro
+            if (habilidade_cruz[w][z] == 1) {
+                tabuleiro[y][x] = 1;
+            }
+        }
+    }
+
 
     // ECREVENDO TABULEIRO
     for(y=-2; y<10; y++) {
@@ -80,10 +146,6 @@ int main() {
     }
     printf("\n");
 
-    // Nível Mestre - Habilidades Especiais com Matrizes
-    // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
-    // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
-    // Sugestão: Exiba o tabuleiro com as áreas afetadas, utilizando 0 para áreas não afetadas e 1 para áreas atingidas.
 
     // FINALIZANDO O PROGRAMA
     return 0;
